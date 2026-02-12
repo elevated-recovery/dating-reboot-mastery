@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,55 @@
   }
   .countdown-strip strong { font-size: 17px; }
 
+  /* Hero countdown timer */
+  .hero-timer-wrap {
+    margin: 28px 0 32px; animation: fadeUp 0.8s ease-out 0.5s both;
+  }
+  .hero-timer-label {
+    font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--red-soft);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .hero-countdown {
+    display: inline-flex; gap: 16px; justify-content: center;
+  }
+  .hero-countdown .hcd-block {
+    background: rgba(0,0,0,0.5); border: 1px solid rgba(173,147,104,0.35);
+    border-radius: 8px; padding: 18px 22px; min-width: 85px; text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .hero-countdown .hcd-num {
+    font-family: 'Oswald', sans-serif; font-size: 44px; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .hero-countdown .hcd-label {
+    font-size: 11px; color: var(--secondary-light); letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 6px;
+  }
+
+  /* Pricing section timer */
+  .pricing-timer-wrap {
+    text-align: center; margin-bottom: 32px;
+  }
+  .pricing-timer-label {
+    font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--red-soft);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .pricing-countdown {
+    display: inline-flex; gap: 12px; justify-content: center;
+  }
+  .pricing-countdown .pcd-block {
+    background: rgba(0,0,0,0.3); border: 1px solid rgba(173,147,104,0.3);
+    border-radius: 6px; padding: 12px 16px; min-width: 70px; text-align: center;
+  }
+  .pricing-countdown .pcd-num {
+    font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .pricing-countdown .pcd-label {
+    font-size: 11px; color: var(--complement); letter-spacing: 1px;
+    text-transform: uppercase; margin-top: 4px;
+  }
+
   /* ===== HERO ===== */
   .hero {
     position: relative;
@@ -80,8 +130,9 @@
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 120px;
-    background: linear-gradient(to top, var(--off-white), transparent);
+    height: 4px;
+    background: var(--secondary);
+    opacity: 0.4;
     pointer-events: none;
   }
   .hero-texture {
@@ -114,10 +165,10 @@
   }
   .hero-value {
     font-family: 'Oswald', sans-serif; font-size: 18px; color: var(--secondary-light);
-    letter-spacing: 2px; margin-bottom: 40px; animation: fadeUp 0.8s ease-out 0.5s both;
+    letter-spacing: 2px; margin-bottom: 28px; animation: fadeUp 0.8s ease-out 0.6s both;
   }
   .hero-value strong { font-size: 24px; color: var(--white); }
-  .hero-cta { animation: fadeUp 0.8s ease-out 0.6s both; }
+  .hero-cta { animation: fadeUp 0.8s ease-out 0.7s both; }
 
   /* ===== BUTTONS ===== */
   .btn {
@@ -395,6 +446,13 @@
     .pricing-card-price { font-size: 48px; }
     .value-items { gap: 24px; }
     .workshop-card { flex-direction: column; }
+    .countdown-strip { font-size: 12px; padding: 10px 12px; }
+    .hero-countdown { gap: 8px; }
+    .hero-countdown .hcd-block { min-width: 60px; padding: 12px 14px; }
+    .hero-countdown .hcd-num { font-size: 32px; }
+    .pricing-countdown { gap: 8px; }
+    .pricing-countdown .pcd-block { min-width: 56px; padding: 10px 12px; }
+    .pricing-countdown .pcd-num { font-size: 28px; }
   }
 </style>
 </head>
@@ -435,6 +493,17 @@
       Dating Reboot<br>Mastery Bundle
     </h1>
     <p class="hero-subtitle">12 of J.K's best dating, relationship, confidence & intimacy workshops — bundled together at an unbeatable price.</p>
+
+    <div class="hero-timer-wrap">
+      <div class="hero-timer-label">⏰ Offer closes in</div>
+      <div class="hero-countdown" id="heroTimer">
+        <div class="hcd-block"><div class="hcd-num" id="hDays">00</div><div class="hcd-label">Days</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hHrs">00</div><div class="hcd-label">Hours</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hMins">00</div><div class="hcd-label">Min</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hSecs">00</div><div class="hcd-label">Sec</div></div>
+      </div>
+    </div>
+
     <p class="hero-value">$4,500+ VALUE — STARTING AT JUST <strong>$147</strong></p>
     <div class="hero-cta">
       <a href="#pricing" class="btn btn-primary">See Pricing Options →</a>
@@ -604,6 +673,16 @@
   <h2 class="section-title">Choose Your Path</h2>
   <p class="section-subtitle" style="color: var(--complement);">Two options. Same mission. Transform your dating life.</p>
 
+  <div class="pricing-timer-wrap">
+    <div class="pricing-timer-label">⏰ This offer disappears in</div>
+    <div class="pricing-countdown" id="pricingTimer">
+      <div class="pcd-block"><div class="pcd-num" id="pDays">00</div><div class="pcd-label">Days</div></div>
+      <div class="pcd-block"><div class="pcd-num" id="pHrs">00</div><div class="pcd-label">Hours</div></div>
+      <div class="pcd-block"><div class="pcd-num" id="pMins">00</div><div class="pcd-label">Minutes</div></div>
+      <div class="pcd-block"><div class="pcd-num" id="pSecs">00</div><div class="pcd-label">Seconds</div></div>
+    </div>
+  </div>
+
   <div class="value-items">
     <div class="value-item"><div class="num">12</div><div class="desc">Workshops & Courses</div></div>
     <div class="value-item"><div class="num">60+</div><div class="desc">Hours of Content</div></div>
@@ -708,6 +787,7 @@
 
 <!-- Scroll Animation -->
 <script>
+  // Scroll Animation
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -726,6 +806,42 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // Countdown Timer — Feb 19, 2026 11:59 PM CST (UTC-6)
+  const deadline = new Date('2026-02-20T05:59:00Z').getTime(); // 11:59 PM CST = 5:59 AM UTC next day
+
+  function updateTimers() {
+    const now = Date.now();
+    const diff = Math.max(0, deadline - now);
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    const pad = n => String(n).padStart(2, '0');
+
+    // Hero timer
+    document.getElementById('hDays').textContent = pad(days);
+    document.getElementById('hHrs').textContent = pad(hrs);
+    document.getElementById('hMins').textContent = pad(mins);
+    document.getElementById('hSecs').textContent = pad(secs);
+
+    // Pricing section timer
+    document.getElementById('pDays').textContent = pad(days);
+    document.getElementById('pHrs').textContent = pad(hrs);
+    document.getElementById('pMins').textContent = pad(mins);
+    document.getElementById('pSecs').textContent = pad(secs);
+
+    if (diff <= 0) {
+      document.querySelectorAll('.hero-timer-wrap, .pricing-timer-wrap').forEach(el => {
+        el.innerHTML = '<div style="font-family:Oswald,sans-serif;font-size:20px;color:#e74c3c;letter-spacing:2px;">THIS SALE HAS ENDED</div>';
+      });
+    }
+  }
+
+  updateTimers();
+  setInterval(updateTimers, 1000);
 </script>
 
 </body>
