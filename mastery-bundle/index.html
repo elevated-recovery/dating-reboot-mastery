@@ -472,7 +472,7 @@
   =============================================
   TWO CHECKOUT LINKS:
   Tier 1 ($147): https://www.rewireyourdesire.net/offers/8p8SjqNf/checkout
-  Tier 2 ($497): https://www.rewireyourdesire.net/offers/omXrrDtw/checkout
+  Tier 2 ($497): /coaching-closed
   
   ⚠️  Replace omXrrDtw with the cloned offer ID from Kajabi
   
@@ -738,7 +738,7 @@
         <strong style="color: var(--secondary);">What does 30 days actually look like?</strong><br>
         You join the Dating Reboot group on day one. Every week, you show up to a live session with J.K where you can bring your real challenges — approach anxiety, PIED fears, a conversation that went sideways — and get coached through it in real time. Between sessions, you have full access to the group: post questions, share wins, get feedback from J.K and the coaching team any time. It's the difference between reading about confidence and actually building it — with someone in your corner who's helped hundreds of men do exactly this.
       </div>
-      <a href="https://www.rewireyourdesire.net/offers/omXrrDtw/checkout" class="btn btn-urgent">Get The Full Program →</a>
+      <a href="/coaching-closed" class="btn btn-urgent">Get The Full Program →</a>
     </div>
   </div>
 
@@ -781,7 +781,7 @@
     <p>12 workshops. Two paths. One transformation.<br>Doors close Thursday, February 19th at 11:59 PM CST.</p>
     <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px;">
       <a href="https://www.rewireyourdesire.net/offers/8p8SjqNf/checkout" class="btn btn-primary" style="font-size: 16px; padding: 18px 40px;">Mastery Bundle — $147 →</a>
-      <a href="https://www.rewireyourdesire.net/offers/omXrrDtw/checkout" class="btn btn-urgent" style="font-size: 16px; padding: 18px 40px;">Full Program — $497 →</a>
+      <a href="/coaching-closed" class="btn btn-urgent" style="font-size: 16px; padding: 18px 40px;">Full Program — $497 →</a>
     </div>
     <p class="guarantee">Instant access to all 12 workshops immediately after purchase.</p>
   </div>
@@ -824,9 +824,18 @@
   // Countdown Timer — Feb 19, 2026 11:59 PM CST (UTC-6)
   const deadline = new Date('2026-02-20T05:59:00Z').getTime(); // 11:59 PM CST = 5:59 AM UTC next day
 
+  let timerInterval;
   function updateTimers() {
     const now = Date.now();
     const diff = Math.max(0, deadline - now);
+
+    if (diff <= 0) {
+      document.querySelectorAll('.hero-timer-wrap, .pricing-timer-wrap').forEach(el => {
+        el.innerHTML = '<div style="font-family:Oswald,sans-serif;font-size:20px;color:#e74c3c;letter-spacing:2px;">THIS OFFER HAS ENDED</div>';
+      });
+      if (timerInterval) clearInterval(timerInterval);
+      return;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -846,16 +855,10 @@
     document.getElementById('pHrs').textContent = pad(hrs);
     document.getElementById('pMins').textContent = pad(mins);
     document.getElementById('pSecs').textContent = pad(secs);
-
-    if (diff <= 0) {
-      document.querySelectorAll('.hero-timer-wrap, .pricing-timer-wrap').forEach(el => {
-        el.innerHTML = '<div style="font-family:Oswald,sans-serif;font-size:20px;color:#e74c3c;letter-spacing:2px;">THIS OFFER HAS ENDED</div>';
-      });
-    }
   }
 
   updateTimers();
-  setInterval(updateTimers, 1000);
+  timerInterval = setInterval(updateTimers, 1000);
 </script>
 
 </body>
